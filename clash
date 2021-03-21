@@ -70,3 +70,24 @@ var() {
   eval "$varname"='$var'
   unset var varname
 }
+
+_unpack_helper() {
+  while true; do
+    if [ "$1" = = ]; then
+      break
+    fi
+    shift
+  done
+  var "$attr_name" "$@" "$attr_name" 
+}
+
+unpack() {
+  local attr_name=
+  for attr_name do
+    if [ "$attr_name" = = ]; then
+      break
+    fi
+    _unpack_helper "$@"
+    shift
+  done
+}

@@ -13,9 +13,7 @@ class Color \
   _print    \
 
 Color_print() {
-  var red = "$1" red
-  var green = "$1" green
-  var blue = "$1" blue
+  unpack red green blue = "$1"
   echo "r: $red, g: $green, b: $blue"
 }
 
