@@ -1,14 +1,4 @@
-class() {
-  :
-}
-
-var() {
-  local varname="$1"
-  shift 2
-  local var=
-  "$@"
-  eval "$varname"='$var'
-}
+. ./clash
 
 class Car  \
   speed    \
@@ -20,7 +10,7 @@ class Color \
   red       \
   green     \
   blue      \
-  print     \
+  _print    \
 
 Color_print() {
   var red = "$1" red
@@ -36,129 +26,6 @@ Car_start() {
 
 Car_stop() {
   echo stopping "$1"
-}
-
-mycolor() {
-  case "$1" in
-    print)
-      local caller="$1"
-      shift
-      local self=mycolor
-      local class=Color
-      local red="$_mycolor_red"
-      local green="$_mycolor_green"
-      local blue="$_mycolor_blue"
-      "$class"_"$caller" "$self" "$@"
-      return
-      ;;
-    red)
-      if [ "$#" -gt 1 ]; then
-        if [ "$2" = = ]; then
-          if [ "$#" -gt 3 ]; then
-            var _mycolor_red = "$@"
-          else
-            _mycolor_red="$3"
-          fi
-        else
-          shift
-          "$_mycolor_red" "$@"
-        fi
-      else
-        var="$_mycolor_red"
-      fi
-      ;;
-    green)
-      if [ "$#" -gt 1 ]; then
-        if [ "$2" = = ]; then
-          if [ "$#" -gt 3 ]; then
-            var _mycolor_green = "$@"
-          else
-            _mycolor_green="$3"
-          fi
-        else
-          shift
-          "$_mycolor_green" "$@"
-        fi
-      else
-        var="$_mycolor_green"
-      fi
-      ;;
-    blue)
-      if [ "$#" -gt 1 ]; then
-        if [ "$2" = = ]; then
-          if [ "$#" -gt 3 ]; then
-            var _mycolor_blue = "$@"
-          else
-            _mycolor_blue="$3"
-          fi
-        else
-          shift
-          "$_mycolor_blue" "$@"
-        fi
-      else
-        var="$_mycolor_blue"
-      fi
-      ;;
-  esac
-}
-
-
-mycar() {
-  case "$1" in
-    start|stop)
-      local caller="$1"
-      shift
-      local self=mycar
-      local class=Car
-      local speed="$_mycar_speed"
-      local color="$_mycar_color"
-      "$class"_"$caller" "$self" "$@"
-      return
-      ;;
-    color)
-      if [ "$#" -gt 1 ]; then
-        if [ "$2" = = ]; then
-          if [ "$#" -gt 3 ]; then
-            var _mycar_color = "$@"
-          else
-            _mycar_color="$3"
-          fi
-        else
-          shift
-          "$_mycar_color" "$@"
-        fi
-      else
-        var="$_mycar_color"
-      fi
-      ;;
-    speed)
-      if [ "$#" -gt 1 ]; then
-        if [ "$2" = = ]; then
-          if [ "$#" -gt 3 ]; then
-            var _mycar_speed = "$@"
-          else
-            _mycar_speed="$3"
-          fi
-        else
-          shift
-          "$_mycar_speed" "$@"
-        fi
-      else
-        var="$_mycar_speed"
-      fi
-      ;;
-  esac
-}
-
-Color() {
-  eval "_$1"_red='$2'
-  eval "_$1"_green='$3'
-  eval "_$1"_blue='$4'
-}
-
-Car() {
-  eval "_$1"_speed='$2'
-  eval "_$1"_color='$3'
 }
 
 Color mycolor 50 75 100
